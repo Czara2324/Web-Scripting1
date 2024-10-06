@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>MDIA 2294</title>
+	
+	<style>
+	    thead{
+	        font-weight:bold;
+	    }
+	    
+	    td{
+	        padding-left:5px;
+	        padding-right:5px;	        
+	    }
+	    
+	    td.sub-total{
+	        text-align:right;	        
+	    }
+	</style>
+</head>
+<body>
+	<h1>MDIA 2294: ACME Corp Invoice</h1>
+	
+	<table>
+	    <thead>
+	        <tr>
+	            <td>ITEM</td>
+	            <td>DESCRIPTION</td>
+	            <td>QTY</td>
+	            <td>PRICE</td>
+	            <td>LINE TOTAL</td>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <tr>
+	            <td>1</td>
+	            <td><input id="line-1-description" type="text" size="40" value="Anvil" /></td>
+	            <td><input id="line-1-quantity" type="text" size="3" value="5" /></td>
+	            <td><input id="line-1-price" type="text" size="6" value="35.00" /></td>
+	            <td class="sub-total"><span id="line-1"></span></td>
+	        </tr>
+	        <tr>
+	            <td>2</td>
+	            <td><input id="line-2-description" type="text" size="40" value="Rocket Skates (each)" /></td>
+	            <td><input id="line-2-quantity" type="text" size="3" value="2" /></td>
+	            <td><input id="line-2-price" type="text" size="6" value="24.99" /></td>
+	            <td class="sub-total"><span id="line-2"></span></td>
+	        </tr>
+	        <tr>
+	            <td>3</td>
+	            <td><input id="line-3-description" type="text" size="40" value="Giant Magnet" /></td>
+	            <td><input id="line-3-quantity" type="text" size="3" value="1" /></td>
+	            <td><input id="line-3-price" type="text" size="6" value="125.50" /></td>
+	            <td class="sub-total"><span id="line-3"></span></td>
+	        </tr>
+	        <tr>
+	            <td>4</td>
+	            <td><input id="line-4-description" type="text" size="40" value="Ball bearings" /></td>
+	            <td><input id="line-4-quantity" type="text" size="3" value="1000" /></td>
+	            <td><input id="line-4-price" type="text" size="6" value="0.25" /></td>
+	            <td class="sub-total"><span id="line-4"></span></td>
+	        </tr>
+	        <tr>
+	            <td>5</td>
+	            <td><input id="line-5-description" type="text" size="40" value="Portable holes" /></td>
+	            <td><input id="line-5-quantity" type="text" size="3" value="12" /></td>
+	            <td><input id="line-5-price" type="text" size="6" value="15.25" /></td>
+	            <td class="sub-total"><span id="line-5"></span></td>
+	        </tr>
+	    </tbody>
+	    <tfoot>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">SUB TOTAL</td>  
+	            <td class="sub-total"><span id="sub-total"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">DISCOUNT</td>  
+	            <td class="sub-total"><span id="discount"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">TAX</td>  
+	            <td class="sub-total"><span id="tax"></span></td>	        
+	        </tr>
+	        <tr>
+	            <td colspan="4" style="text-align:right;">TOTAL</td>  
+	            <td class="sub-total" style="border-top:solid black 1px"><span id="Total"></span></td>	        
+	        </tr>
+	    </tfoot>	    
+	</table>
+	
+	<div><button id="calculate">Calculate</button></div>
+	<div>NOTE: discounts of 10% are given to orders over $250</div>
+
+	<script>
+		//Hand-coded by Czara Cascalla (A01391406)
+		//MDIA 2294 Assignment 1 
+
+
+		// reference for the calculate button
+		//text shows up if button is clicked
+		console.log("Button works!");
+		
+		//set a variable for the action of calculate to happen when button is clicked
+		const calcBtn = document.querySelector("#calculate");
+
+		
+		//create a function to calculate line total for each item
+	    function calculate() {
+
+			let subTotal = 0;
+			
+			//Item 1 - Anvil
+			//**************
+	
+			// get value of the quantity from the item in first line
+			// value is the quantity that is an <input> from the dom
+			const anvilQuantity = document.querySelector("#line-1-quantity").value;
+			// shows the quantity
+			console.log("AnvilQuantity",anvilQuantity);
+
+			// get value of the price from the item in first line
+			// value is the price that is an <input> from the dom
+			const anvilUnitPrice = document.querySelector("#line-1-price").value;
+			// shows the price per unit
+			console.log("UnitPrice",anvilUnitPrice);
+
+			// calculate the total for item1
+			// input quantity value will be multiplied to the input price value
+			const anvilTotal = anvilQuantity * anvilUnitPrice;
+			//show on console to confirm
+			console.log("AnvilTotal",anvilTotal);
+			
+			// display result on span id #line-1
+			// add a $ sign and display to 2 decimal places
+			document.querySelector("#line-1").innerText = "$ " + anvilTotal.toFixed(2);
+
+			// reassign subTotal to the old value of subtotal + Item price amount
+			subTotal = subTotal + anvilTotal;
+		
+
+			// Item2 - Rocket Skates
+			// *********************
+
+			// Repeat code for determining the value for the quantity and unit price of Item2
+			const rocketQuantity = document.querySelector("#line-2-quantity").value;
+			console.log("RocketQuantity",rocketQuantity);
+			
+			const rocketUnitPrice = document.querySelector("#line-2-price").value;
+			console.log("RocketUnitPrice",rocketUnitPrice);
+
+			const rocketTotal = rocketQuantity * rocketUnitPrice;
+			console.log("RocketTotal",rocketTotal);
+			
+			document.querySelector("#line-2").innerText = "$ " + rocketTotal.toFixed(2);
+
+			// Used new method to calculate price to avoid redundancy, will repeat til Item5
+			// Same as subTotal = subTotal + rocketPrice, this will Add to the value currently stored in Item1
+			subTotal += rocketTotal;
+
+
+			// Item3-Giant Magnet
+			// ******************
+
+			const magnetQuantity = document.querySelector("#line-3-quantity").value;
+			console.log("MagnetQuantity",magnetQuantity);
+			
+			const magnetUnitPrice = document.querySelector("#line-3-price").value;
+			console.log("MagnetPrice",magnetUnitPrice);
+
+			const magnetTotal = magnetQuantity * magnetUnitPrice;
+			console.log("MagnetTotal",magnetTotal);
+			
+			document.querySelector("#line-3").innerText = "$ " + magnetTotal.toFixed(2);
+
+			subTotal += magnetTotal;
+
+
+			// Item4- Ball bearings
+			// ********************
+
+			const ballQuantity = document.querySelector("#line-4-quantity").value;
+			console.log ("BallQuantity",ballQuantity);
+
+			const ballUnitPrice = document.querySelector("#line-4-price").value;
+			console.log("BallPrice",ballUnitPrice);
+			
+			const ballTotal = ballQuantity * ballUnitPrice;
+			console.log("BallTotal",ballTotal);
+
+			document.querySelector("#line-4").innerText = "$ " + ballTotal.toFixed(2);
+
+			subTotal += ballTotal;
+
+
+			// Item5-Portable Holes
+			// ********************
+
+
+			const portQuantity = document.querySelector("#line-5-quantity").value;
+			console.log("PortQuantity",portQuantity);
+			
+			const portUnitPrice = document.querySelector("#line-5-price").value;
+			console.log("PortPrice",portUnitPrice);
+			
+			const portTotal = portQuantity * portUnitPrice;
+			console.log("PortTotal",portTotal);
+			
+			document.querySelector("#line-5").innerText = "$ " + portTotal.toFixed(2);
+
+			subTotal += portTotal;
+
+
+			// Sub Total
+			// *********
+
+			// Show the total in the console
+			console.log("Subtotal",subTotal);
+
+			// Display the Subtotal in the span area of #sub-total, and list the answer up to 2 decimal places
+			document.querySelector("#sub-total").innerHTML = "$ " + subTotal.toFixed(2);
+
+			// Declare a variable for applying the 10% discount for items that have a total of $250 or more
+			// If the total is $250 or more, value of subtotal will be multiplied by 0.1 and display on the screen, else, no calculation
+			const discount = (subTotal >= 250) ? subTotal * 0.1 : 0;
+			console.log("Discount",discount);
+
+			// Display calculated value on the span of #discount, and list the answer up to 2 decimal places
+			document.querySelector("#discount").innerText = discount.toFixed(2);
+
+			
+			// Calculate for the tax after discount is lessened from the subTotal
+			// Answer is multiplied to 12% tax
+			// Console log to confirm
+			const Tax = (subTotal-discount)*0.12
+			console.log("Tax",Tax);
+
+			// Display calculated tax on the span #tax, and list the answer up to 2 decimal places
+			document.querySelector("#tax").innerText = Tax.toFixed(2);
+
+			// Determine and declare final Total value of order
+			// Subtotal of items - 10% discount, answer will be added with Tax value
+			const totalFinal = (subTotal - discount) + Tax;
+
+			// Show the Total Price on span #Total, and list the answer up to 2 decimal places
+			document.querySelector("#Total").innerText = "$ " + totalFinal.toFixed(2);
+
+	    	}
+			
+			// Test run function of Calculate button
+			// When you click on button, results will display
+			calcBtn.addEventListener("click", calculate);
+
+    </script>
+</body>
+</html>

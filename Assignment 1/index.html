@@ -220,15 +220,22 @@
 			// Display the Subtotal in the span area of #sub-total, and list the answer up to 2 decimal places
 			document.querySelector("#sub-total").innerHTML = "$ " + subTotal.toFixed(2);
 
+
+			//Discount
+			//**********
+
+	
 			// Declare a variable for applying the 10% discount for items that have a total of $250 or more
 			// If the total is $250 or more, value of subtotal will be multiplied by 0.1 and display on the screen, else, no calculation
 			const discount = (subTotal >= 250) ? subTotal * 0.1 : 0;
 			console.log("Discount",discount);
 
 			// Display calculated value on the span of #discount, and list the answer up to 2 decimal places
-			document.querySelector("#discount").innerText = discount.toFixed(2);
+			document.querySelector("#discount").innerText = "$ " + discount.toFixed(2);
 
-			
+			//Tax
+			//**********
+
 			// Calculate for the tax after discount is lessened from the subTotal
 			// Answer is multiplied to 12% tax
 			// Console log to confirm
@@ -236,7 +243,10 @@
 			console.log("Tax",Tax);
 
 			// Display calculated tax on the span #tax, and list the answer up to 2 decimal places
-			document.querySelector("#tax").innerText = Tax.toFixed(2);
+			document.querySelector("#tax").innerText = "$ " +  Tax.toFixed(2);
+
+			//Total
+			//**********
 
 			// Determine and declare final Total value of order
 			// Subtotal of items - 10% discount, answer will be added with Tax value
